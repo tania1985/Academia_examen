@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import mysql.connector
 from mysql.connector import Error
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')  # Asegúrate de que Flask busque en la carpeta 'templates'
 app.secret_key = 'supersecretkey'  # Necesario para usar flash messages
 
 # Configuración de la base de datos MySQL
