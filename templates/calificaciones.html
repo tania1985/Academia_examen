@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionar Calificaciones</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Gestionar Calificaciones</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="post">
+        <label for="alumno_id">Alumno: </label>
+        <select name="alumno_id" id="alumno_id" required>
+            {% for alumno in alumnos %}
+                <option value="{{ alumno[0] }}">{{ alumno[1] }}</option>
+            {% endfor %}
+        </select>
+        <label for="asignatura_id">Asignatura: </label>
+        <select name="asignatura_id" id="asignatura_id" required>
+            {% for asignatura in asignaturas %}
+                <option value="{{ asignatura[0] }}">{{ asignatura[1] }}</option>
+            {% endfor %}
+        </select>
+        <label for="calificacion">Calificación: </label>
+        <input type="number" name="calificacion" id="calificacion" required>
+        <button type="submit">Asignar Calificación</button>
+    </form>
+    <h2>Lista de Calificaciones</h2>
+    <ul>
+        {% for calificacion in calificaciones %}
+            <li>Alumno: {{ calificacion[1] }} - Asignatura: {{ calificacion[2] }} - Calificación: {{ calificacion[3] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

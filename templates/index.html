@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Notas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Bienvenido a la gestión de notas</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('alumnos') }}">Gestionar Alumnos</a></li>
+            <li><a href="{{ url_for('asignaturas') }}">Gestionar Asignaturas</a></li>
+            <li><a href="{{ url_for('calificaciones') }}">Gestionar Calificaciones</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionar Alumnos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Gestionar Alumnos</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="post">
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="nombre" id="nombre" required>
+        <label for="edad">Edad: </label>
+        <input type="number" name="edad" id="edad" required>
+        <button type="submit">Registrar Alumno</button>
+    </form>
+    <h2>Lista de Alumnos</h2>
+    <ul>
+        {% for alumno in alumnos %}
+            <li>{{ alumno[1] }} (Edad: {{ alumno[2] }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
